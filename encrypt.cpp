@@ -72,7 +72,7 @@ int dChoose()
 
 int main()
 {
-    int i=0;
+    int i=0,f=0;
     //char ch[10]="ahc5i90w4";
   // int  c=rK();
   //int c=9;
@@ -109,9 +109,9 @@ int main()
          EK.open("k.txt");
         EKI.open("ki.txt");
 
-   cout<<"\t\t\t Enter The Size Of The Key (Squares) (9-81): ";
+   cout<<"\t\t\t Enter The Size Of The Key: ";
    cin>>c;
-        const int s=c;
+        const int s=c+1;
         T.open("KL.txt");
         T<<s;
         T.close();
@@ -282,9 +282,26 @@ FW.close();
 
     EN.close();
 
+        LOOP:
+     cout<<endl<<"\t\t\t 1. Decrypt The Message"<<endl<<"\t\t\t 2. Exit";
+     cout<<endl<<"\t\t\t Enter Your Choice: ";
+     cin>>f;
+
+     if((f<1)||(f>2))
+        goto LOOP;
+
+     else if(f==2)
+        exit(0);
+
     }
 
-    else if(e==2)
+
+
+
+
+
+
+     if((e==2)||(f==1))
     {
         clrscr();
 

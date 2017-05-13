@@ -105,7 +105,7 @@ void Dec ()
 
 
 cout<<endl<<"Deciphered Text"<<endl;
-cout<<PT;
+cout<<ct;
 
 EF.close();
 DE.close();
