@@ -26,10 +26,15 @@ char* kSel(char a[], char b[], int L, int M)
     {
         aa[i]*=M;
         bb[i]*=M;
-
     }
+        cout<<endl<<"Character 1= "<<aa[i-1]<<"\t"<<"Character 2= "<<bb[i-1]<<endl;
 
-    if((aa[i] & 1)==(bb[i]) & 1)
+    bool a1=aa[i-1] & 1;
+    bool b1=bb[i-1] & 1;
+    cout<<endl<<"LSB of Key1= "<<a1<<endl;
+    cout<<endl<<"LSB of Key2= "<<b1<<endl;
+
+    if((aa[i-1] & 1)==(bb[i-1]) & 1)
     {
             k_pointer=a;
             i=1;
