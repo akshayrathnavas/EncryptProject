@@ -17,7 +17,7 @@ using namespace std;
 //void dispi(int a[m][m], int m); // Display Integer Array/Matrix
 //unsigned int ConvertToBinary(int n);
 
-void randKeyGen(char K[], int len)
+char* randKeyGen(char K[], int len)
  {
      static int i, j, k, p, q, a[100],sum, M, n;
      const int L=len;
@@ -66,11 +66,6 @@ void randKeyGen(char K[], int len)
      cout<<endl<<"Reverse Key Integer"<<endl;
      dispII(r_Keyi,L);
 
-     for(i=0;i<L;++i)
-     {
-        a[i]=K[i];
-        sum+=a[i]*(i+1);
-     }
 
 
         M=sum%L;
@@ -112,6 +107,9 @@ dispi(r_Key1i[0],m);
             }
   }
 
+
+    cout<<endl<<"Original Matrix Integer"<<endl;
+
 dispi(key1i[0],m);
 
 for(i=0;i<m;++i)
@@ -137,16 +135,6 @@ dispc(key2[0],m);
 
 dispCC(k2,L);
 
-char* fP=kSel(K, k2, L, M);
-char fKey[L];
-
- p=0;
-
-    for(i=0;i<L;++i)
-    {
-        fKey[i]= fP[p++];
-
-    }
 
 
 /*
@@ -158,15 +146,13 @@ for(i=0;i<L;++i)
 
 
 
-
-dispCC(fKey,L);
-
+return k2;
 
 
 
 
 
-getch();
+
 
 
 
@@ -177,31 +163,3 @@ getch();
 
 
 
-int main()
-{
-    int i=0;
-    //char ch[10]="ahc5i90w4";
-   int  c=rK();
-  //int c=9;
-    const int s=c;
-    char* K=Gen(c);
-    char KK[s];
-    int p=0;
-
-    for(i=0;i<c;++i)
-    {
-        KK[i]= K[p++];
-
-    }
-
-   // cout<<endl<<"Original Key "<<endl;
-  //  dispCC(KK,s);
-
-    int L=strlen(K);
-
-    randKeyGen(KK,s);
-
-
-    return 0;
-
-}

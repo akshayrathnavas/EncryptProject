@@ -29,13 +29,7 @@ char* kSel(char a[], char b[], int L, int M)
 
     }
 
-    cout<<"aa";
-
-    cout<<bitset<8>(aa[i]);
-    cout<<bitset<8>(bb[i]);
-
-
-    if(bitset<8>(aa[i])==bitset<8>(bb[i]))
+    if((aa[i] & 1)==(bb[i]) & 1)
     {
             k_pointer=a;
             i=1;
@@ -50,16 +44,5 @@ char* kSel(char a[], char b[], int L, int M)
 
     return k_pointer;
 
-
-}
-
-
-int main()
-{
-
-    char s1[10]="sdfjcv3fa", s2[10]="ufhc2c3d3";
-    int L=9, m=8;
-
-    kSel(s1,s2,L,m);
 
 }
