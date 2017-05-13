@@ -7,49 +7,74 @@
 #include<conio.h>
 #include "display.cpp"
 #include "xor.cpp"
+#include "kGen.cpp"
+#include "keySel.cpp"
 
 using namespace std;
 
 
-//void dispc(char a[3][3], int m); // Display Character Array/Matrix
-//void dispi(int a[3][3], int m); // Display Integer Array/Matrix
+//void dispc(char a[m][m], int m); // Display Character Array/Matrix
+//void dispi(int a[m][m], int m); // Display Integer Array/Matrix
 //unsigned int ConvertToBinary(int n);
 
-void randKeyGen(char K[])
+char* randKeyGen(char K[], int len, int sum)
  {
-     static int L, i, j, p, q, a[100],sum, M, n;
-     char r_Key[100];
+     static int i, j, k, p, q, a[100], M, n;
+     const int L=len;
+     char r_Key[L];
 
-     L=strlen(K);
      const int m=sqrt(L);
 
+     cout<<endl<<"L= "<<L<<" m= "<<m<<endl;
 
-     char key1[3][3], r_Key1[3][3]; //String Matrix And Its Reverse
-     int key1i[3][3], r_Key1i[3][3]; //Integer Matrix And Its Reverse
 
-     char key2[3][3], k2[9];
-     int key2i[3][3];
+     char key1[m][m], r_Key1[m][m]; //String Matrix And Its Reverse
+     int Ki[L], r_Keyi[L], key1i[m][m], r_Key1i[m][m]; //Integer Matrix And Its Reverse
 
-     strcpy(r_Key,K);
-     strrev(r_Key);
+     char key2[m][m], k2[L];
+     int key2i[m][m];
 
+//strcpy(r_Key,K);
+    //  cout<<endl<<"Original Key Copied To Reverse"<<endl;
+    // dispCC(r_Key,L);
+
+
+        j=L-1;
+        for(i = 0; i < L; ++i)
+        {
+            r_Key[i] = K[j];
+         //   cout<<endl<<K[j]<<"  "<<r_Key[i]<<endl;
+
+            --j;
+        }
+
+
+
+        for(i=0;i<L;++i)
+        {
+            Ki[i]=K[i];
+            r_Keyi[i]=r_Key[i];
+        }
+
+
+    cout<<endl<<"Original Key"<<endl;
      dispCC(K,L);
+     cout<<endl<<"Original Key Integer"<<endl;
+     dispII(Ki,L);
+    cout<<endl<<"Reverse Key"<<endl;
      dispCC(r_Key,L);
+     cout<<endl<<"Reverse Key Integer"<<endl;
+     dispII(r_Keyi,L);
 
-     for(i=0;i<L;++i)
-     {
-        a[i]=K[i];
-        sum+=a[i]*(i+1);
-     }
 
 
         M=sum%L;
 
 
-        for(i=0;i<3;++i)
+        for(i=0;i<m;++i)
         {
 
-            for(j=0;j<3;++j)
+            for(j=0;j<m;++j)
             {
                 key1[i][j]=K[p++];
                 key1i[i][j]=key1[i][j];
@@ -59,28 +84,39 @@ void randKeyGen(char K[])
             }
         }
 
+    cout<<endl<<"Original Matrix"<<endl;
 
-dispc(key1,m);
-dispi(key1i,m);
-dispc(r_Key1,m);
-dispi(r_Key1i,m);
+dispc(key1[0],m);
+    cout<<endl<<"Original Matrix Integer"<<endl;
+
+dispi(key1i[0],m);
+    cout<<endl<<"Reverse Matrix"<<endl;
+
+dispc(r_Key1[0],m);
+    cout<<endl<<"Reverse Matrix Integer"<<endl;
+
+dispi(r_Key1i[0],m);
 
 
-  for(i=0;i<3;++i)
+  for(i=0;i<m;++i)
   {
-            for(j=0;j<3;++j)
+            for(j=0;j<m;++j)
             {
 
                 key1i[i][j]=key1[i][j]+M;
             }
   }
 
-dispi(key1i,m);
 
-for(i=0;i<3;++i)
+    cout<<endl<<"Original Matrix Integer"<<endl;
+
+dispi(key1i[0],m);
+
+n=0;
+for(i=0;i<m;++i)
 {
 
-            for(j=0;j<3;++j)
+            for(j=0;j<m;++j)
             {
 
                 key2i[i][j]=exor(key1i[i][j],r_Key1i[i][j]);
@@ -89,14 +125,37 @@ for(i=0;i<3;++i)
 
             }
 }
- ofstream outfile;
-   outfile.open("afile.txt");
-      outfile << k2 << endl;
 
-dispi(key2i,m);
-dispc(key2,m);
+    cout<<endl<<"Key 2 Matrix Integer"<<endl;
+
+dispi(key2i[0],m);
+    cout<<endl<<"Key 2 Matrix"<<endl;
+
+dispc(key2[0],m);
+    cout<<endl<<"Key 2"<<endl;
+
 dispCC(k2,L);
-getch();
+
+
+
+/*
+
+for(i=0;i<L;++i)
+    =*(fP+i);
+
+*/
+
+
+
+return k2;
+
+
+
+
+
+
+
+
 
 
 }
@@ -105,12 +164,3 @@ getch();
 
 
 
-int main()
-{
-    char ch[10]="ahc5i90w4";
-    randKeyGen(ch);
-
-
-    return 0;
-
-}
