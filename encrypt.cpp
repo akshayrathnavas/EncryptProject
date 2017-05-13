@@ -1,399 +1,16 @@
 #include<fstream>
-#include <iostream>
 #include<cstdio>
 #include<cmath>
 #include<string.h>
-#include<conio.h>
-#include <cstdlib>
-#include<time.h>
-#include<stdio.h>
+#include "keyGen.cpp"
+#include "trans.cpp"
 
-using namespace std;
-
-static int size;
-
-
-
+int L;
 
 void clrscr()
 {
-
     system("cls");
 }
-void dispc(char *a, int m)
-{
-
-
-    int i=0,j=0;
-
-  for(i=0;i<m;++i)
- {
-
-            for(j=0;j<m;++j)
-            {
-
-                cout<< *(a+ i*m + j)<<"\t";
-
-            }
-                cout<<endl;
-
- }
- cout<<endl;
-}
-
-void dispi(int *a, int m)
-{
-
-
-    int i=0,j=0;
-
-
-  for(i=0;i<m;++i)
- {
-
-            for(j=0;j<m;++j)
-            {
-
-                cout<< *(a+ i*m + j)<<"\t";
-
-            }
-                cout<<endl;
-
- }
- cout<<endl;
-}
-
-
-void dispCC(char a[], int m)
-{
-    int i=0;
-
-    for(i=0;i<m;++i)
-    {
-
-        cout<<a[i]<<"\t";
-    }
-    cout<<endl;
-    cout<<endl;
-}
-
-
-
-void dispII(int a[], int m)
-{
-    int i=0;
-
-    for(i=0;i<m;++i)
-    {
-
-        cout<<a[i]<<"\t";
-    }
-    cout<<endl;
-    cout<<endl;
-}
-
-
-
-char* kSel(char a[], char b[], int L, int M)
-{
-    int i=0, j=0;
-    char aa[L], bb[L];
-     char* k_pointer;
-
-     for(i=0;i<L;++i)
-     {
-         aa[i]=a[i];
-         bb[i]=b[i];
-     }
-
-    for(i=0;i<L;++i)
-    {
-        aa[i]*=M;
-        bb[i]*=M;
-    }
-        cout<<endl<<"Character 1= "<<aa[i-1]<<"\t"<<"Character 2= "<<bb[i-1]<<endl;
-
-    bool a1=aa[i-1] & 1;
-    bool b1=bb[i-1] & 1;
-    cout<<endl<<"LSB of Key1= "<<a1<<endl;
-    cout<<endl<<"LSB of Key2= "<<b1<<endl;
-
-    if((aa[i-1] & 1)==(bb[i-1]) & 1)
-    {
-            k_pointer=a;
-            i=1;
-    }
-    else
-    {
-            k_pointer=b;
-            i=2;
-    }
-    cout<<endl<<"Selected Key is Key "<<i<<endl;
-
-
-    return k_pointer;
-
-
-}
-
-
-char* Gen(int s)
-{
-    const int a=s;
-
-   int t=1000,p=0, i=0;
-
-   char K[a];
-   int Ki[a];
-
-    srand((int) time(0));
-
-   for(i=0;i<s;++i)
-   {
-        t=rand()%256;
-        while(!((t<256)&&(t!=0)))
-        {
-            t=rand()%256;
-        }
-        K[p++]=t;
-        Ki[(p-1)]=t;
-
-        t=rand()%256;
-   }
-/*
-cout<<endl<<"Original Key"<<endl;
-   dispCC(K,s);
-cout<<endl<<"Original Key Integer"<<endl;
-  dispII(Ki,s);
-  */
-
-    char* k_pointer=K;
-    return k_pointer;
-
-
-}
-int rK()
-{
-
- int i=0,j=0,s=0;
-     size=rand()%10;
-
-   while(!(size>2 && (size <10)))
-   {
-        srand (time(NULL));
-        size=rand()%10;
-   }
-   cout<<size*size<<endl;
- s =size*size;
- return s;
-}
-
-
-
-
-int exor(int x, int y)
-{
-    int res = 0; // Initialize Result
-
-    // Assuming 8-bit Integer
-    for (int i = 8; i >= 0; --i)
-    {
-       // Find current bits in x and y
-       bool b1 = x & (1 << i);
-       bool b2 = y & (1 << i);
-
-        // If both are 1 then 0 else xor is same as OR
-        bool xoredBit = (b1 & b2) ? 0 : (b1 | b2);
-
-        // Update Result
-        res <<= 1;
-        res |= xoredBit;
-    }
-    return res;
-}
-
-
-
-
-int z=0;
-
-int fNoD(int sum)
-{
-    int i=0;
-    while(sum!=0)
-    {
-        sum/=10;
-        ++i;
-    }
-    return i;
-}
-
-char* trans(char K[], int L, int sum)
-{
-    const int D=fNoD(sum);
-    char temp;
-    int i=0, j=0;
-    int S[D];
-
-    for(i=D-1;i>=0;--i)
-    {
-        S[i]=sum%10;
-        sum/=10;
-    }
-
-    i=0;
-    j=0;
-    while(L)
-    {
-        j=S[i%D]-1;
-        temp=K[i];
-        K[i]=K[j];
-        K[j]=temp;
-        ++i;
-        --L;
-    }
-    return K;
-}
-
-
-char* randKeyGen(char K[], int len, int sum)
- {
-     static int i, j, k, p, q, a[100], M, n;
-     const int L=len;
-     char r_Key[L];
-
-     const int m=sqrt(L);
-
-     cout<<endl<<"L= "<<L<<" m= "<<m<<endl;
-
-
-     char key1[m][m], r_Key1[m][m]; //String Matrix And Its Reverse
-     int Ki[L], r_Keyi[L], key1i[m][m], r_Key1i[m][m]; //Integer Matrix And Its Reverse
-
-     char key2[m][m], k2[L];
-     int key2i[m][m];
-
-//strcpy(r_Key,K);
-    //  cout<<endl<<"Original Key Copied To Reverse"<<endl;
-    // dispCC(r_Key,L);
-
-
-        j=L-1;
-        for(i = 0; i < L; ++i)
-        {
-            r_Key[i] = K[j];
-         //   cout<<endl<<K[j]<<"  "<<r_Key[i]<<endl;
-
-            --j;
-        }
-
-
-
-        for(i=0;i<L;++i)
-        {
-            Ki[i]=K[i];
-            r_Keyi[i]=r_Key[i];
-        }
-
-
-    cout<<endl<<"Original Key"<<endl;
-     dispCC(K,L);
-     cout<<endl<<"Original Key Integer"<<endl;
-     dispII(Ki,L);
-    cout<<endl<<"Reverse Key"<<endl;
-     dispCC(r_Key,L);
-     cout<<endl<<"Reverse Key Integer"<<endl;
-     dispII(r_Keyi,L);
-
-
-
-        M=sum%L;
-
-
-        for(i=0;i<m;++i)
-        {
-
-            for(j=0;j<m;++j)
-            {
-                key1[i][j]=K[p++];
-                key1i[i][j]=key1[i][j];
-
-                r_Key1[i][j]=r_Key[q++];
-                r_Key1i[i][j]=r_Key1[i][j];
-            }
-        }
-
-    cout<<endl<<"Original Matrix"<<endl;
-
-dispc(key1[0],m);
-    cout<<endl<<"Original Matrix Integer"<<endl;
-
-dispi(key1i[0],m);
-    cout<<endl<<"Reverse Matrix"<<endl;
-
-dispc(r_Key1[0],m);
-    cout<<endl<<"Reverse Matrix Integer"<<endl;
-
-dispi(r_Key1i[0],m);
-
-
-  for(i=0;i<m;++i)
-  {
-            for(j=0;j<m;++j)
-            {
-
-                key1i[i][j]=key1[i][j]+M;
-            }
-  }
-
-
-    cout<<endl<<"Original Matrix Integer"<<endl;
-
-dispi(key1i[0],m);
-
-n=0;
-for(i=0;i<m;++i)
-{
-
-            for(j=0;j<m;++j)
-            {
-
-                key2i[i][j]=exor(key1i[i][j],r_Key1i[i][j]);
-                key2[i][j]=key2i[i][j];
-                k2[n++]=key2[i][j];
-
-            }
-}
-
-    cout<<endl<<"Key 2 Matrix Integer"<<endl;
-
-dispi(key2i[0],m);
-    cout<<endl<<"Key 2 Matrix"<<endl;
-
-dispc(key2[0],m);
-    cout<<endl<<"Key 2"<<endl;
-
-dispCC(k2,L);
-
-
-
-/*
-
-for(i=0;i<L;++i)
-    =*(fP+i);
-
-*/
-
-
-
-return k2;
-
-
-}
-
-
-
-
 int sum=0;
 int findMod(char K[], int L)
 {
@@ -425,28 +42,70 @@ dispII(S,9);
     return M;
 }
 
+
 int choose()
 {
-     int e;
+     int e=0;
      cout<<"\t\t\t 1. Encrpytion"<<endl<<"\t\t\t 2. Decryption"<<endl<<"\t\t\t 3. Exit"<<endl<<"\t\t\t Enter Your Choice: ";
      cin>>e;
      return e;
+}
 
+int dChoose()
+{
+    int d=0;
+    cout<<"\t\t\t 1. Decrypt Last Encrypted Text"<<endl<<"\t\t\t 2. Decrypt New Text"<<endl<<"\t\t\t 3.Exit"<<endl<<"\t\t\t Enter Your Choice: ";
+    cin>>d;
+    return d;
 }
 
 
-char* decrypt(int L, int m)
+void decrypt(int L, int m)
 {
-    ifstream DE;
+    ifstream EF,DE;
+    EF.open("o.txt");
     DE.open("k.txt");
     static int len=L;
+    int i=0;
 
-    char pt[L];
+    char ct[len];
+    char tk[len];
+    char PT[len];
+
+    if(m==1)
+    {
+       EF.getline(ct,L);
+       cout<<endl<<"Last Cipher Text"<<endl;
+       dispCC(ct,L);
+    }
+    else
+        cout<<"\t\t\t Enter The Text To Be Decrypted: ";
+        cin.getline(ct,L);
+
+    int R=::L/2;
+
+    while(R>0)
+    {
+        cout<<endl<<"Round "<<R-L<<endl;
+        DE.getline(tk,L);
+
+         for(i=0;i<L;++i)
+            {
+                PT[i]=exor(ct[i],tk[i]);
+                ct[i]=PT[i];
+            }
+
+        --R;
+    }
 
 
+dispCC(ct,L);
 
 
 }
+
+
+
 
 int main()
 {
@@ -462,6 +121,7 @@ int main()
    int c;
 
    int e=choose();
+   int d=0;
 
    if(e==3)
     exit(0);
@@ -524,7 +184,8 @@ int main()
   //  dispCC(KK,s);
 
     //const int L=strlen(K);
-            const int L=c;
+            const int L=s;
+            ::L=L;
 
     int R=0;
 
@@ -576,7 +237,6 @@ while(R<=L/2)
     for(i=0;i<L;++i)
     {
         fKeyT[i]= fPT[p++];
-
     }
 
     ++R;
@@ -587,8 +247,13 @@ while(R<=L/2)
     cout<<endl<<"Final Key After Transposition"<<endl;
         dispCC(fKeyT,L);
 
-        EK<<
+        cout<<endl<<"Writing To File"<<endl;
 
+        for(i=0;i<L;++i)
+        {
+            EK<<fKeyT[i];
+        }
+        EK<<"\n";
 
 
 
@@ -620,6 +285,7 @@ while(R<=L/2)
 
 }
 
+EK.close();
 
 ofstream FW,EN;
 FW.open("OUT1.txt");
@@ -635,11 +301,34 @@ FW.close();
 
     }
 
+    else if(e==2)
+    {
+        clrscr();
+
+        d=dChoose();
+
+    while((e<1)||(e>3))
+    {
+      cout<<endl<<"\t\t\t Wrong Option. Try Again"<<endl;
+      clrscr();
+      d=dChoose();
+    }
+        if(d!=3)
+        decrypt(::L,d);
+
+        else
+            exit(0);
+
+
+    }
+
    getch();
 
     return 0;
 
 }
+
+
 
 
 
