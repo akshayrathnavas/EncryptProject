@@ -2,6 +2,8 @@
 #include<cstdio>
 #include<cmath>
 #include<string.h>
+
+
 class Enc
 {
 
