@@ -7,6 +7,7 @@
 #include<conio.h>
 #include "display.cpp"
 #include "xor.cpp"
+#include "kGen.cpp"
 
 using namespace std;
 
@@ -17,10 +18,11 @@ using namespace std;
 
 void randKeyGen(char K[])
  {
-     static int L, i, j, p, q, a[100],sum, M, n;
-     char r_Key[100];
+     static int i, j, p, q, a[100],sum, M, n;
+     const int L=strlen(K);
 
-     L=strlen(K);
+     char r_Key[L];
+
      const int m=sqrt(L);
 
 
@@ -46,10 +48,10 @@ void randKeyGen(char K[])
         M=sum%L;
 
 
-        for(i=0;i<3;++i)
+        for(i=0;i<m;++i)
         {
 
-            for(j=0;j<3;++j)
+            for(j=0;j<m;++j)
             {
                 key1[i][j]=K[p++];
                 key1i[i][j]=key1[i][j];
@@ -66,9 +68,9 @@ dispc(r_Key1,m);
 dispi(r_Key1i,m);
 
 
-  for(i=0;i<3;++i)
+  for(i=0;i<m;++i)
   {
-            for(j=0;j<3;++j)
+            for(j=0;j<m;++j)
             {
 
                 key1i[i][j]=key1[i][j]+M;
@@ -77,10 +79,10 @@ dispi(r_Key1i,m);
 
 dispi(key1i,m);
 
-for(i=0;i<3;++i)
+for(i=0;i<m;++i)
 {
 
-            for(j=0;j<3;++j)
+            for(j=0;j<m;++j)
             {
 
                 key2i[i][j]=exor(key1i[i][j],r_Key1i[i][j]);
@@ -89,9 +91,6 @@ for(i=0;i<3;++i)
 
             }
 }
- ofstream outfile;
-   outfile.open("afile.txt");
-      outfile << k2 << endl;
 
 dispi(key2i,m);
 dispc(key2,m);
@@ -107,8 +106,15 @@ getch();
 
 int main()
 {
-    char ch[10]="ahc5i90w4";
-    randKeyGen(ch);
+    //char ch[10]="ahc5i90w4";
+  //  int  c=rK();
+  //int c=9;
+   // const int size=9;
+    char *K=Gen(9);
+
+    int L=strlen(K);
+
+    randKeyGen(K);
 
 
     return 0;
