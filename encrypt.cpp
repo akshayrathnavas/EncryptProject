@@ -6,6 +6,7 @@
 #include<conio.h>
 #include <cstdlib>
 #include<time.h>
+#include<stdio.h>
 
 using namespace std;
 
@@ -14,6 +15,11 @@ static int size;
 
 
 
+void clrscr()
+{
+
+    system("cls");
+}
 void dispc(char *a, int m)
 {
 
@@ -419,20 +425,66 @@ dispII(S,9);
     return M;
 }
 
+int choose()
+{
+     int e;
+     cout<<"\t\t\t 1. Encrpytion"<<endl<<"\t\t\t 2. Decryption"<<endl<<"\t\t\t 3. Exit"<<endl<<"\t\t\t Enter Your Choice: ";
+     cin>>e;
+     return e;
+
+}
 
 
+char* decrypt(int L, int m)
+{
+    ifstream DE;
+    DE.open("k.txt");
+    static int len=L;
+
+    char pt[L];
+
+
+
+
+}
 
 int main()
 {
     int i=0;
     //char ch[10]="ahc5i90w4";
-   int  c=rK();
+  // int  c=rK();
   //int c=9;
 
    // const int s=c;
-        const int s=9;
+   ofstream EK;
+   EK.open("k.txt");
+
+   int c;
+
+   int e=choose();
+
+   if(e==3)
+    exit(0);
+
+  while((e<1)||(e>3))
+  {
+      cout<<endl<<"\t\t\t Wrong Option. Try Again"<<endl;
+      clrscr();
+      e=choose();
+  }
+
+   if(e==1)
+    {
+   cout<<"\t\t\t Enter The Size Of The Key (Squares) (9-81): ";
+   cin>>c;
+        const int s=c;
+
 
         char PT[s]="abcdefgh";
+
+         cout<<endl<<endl<<"\t\t\tEnter The Plain Text (Size "<<c<<"): ";
+         cin.getline(PT,s);
+
         char CT[s];
         int PTi[s];
         int CTi[s];
@@ -447,6 +499,9 @@ int main()
         PT[7]=108;
       //  PT[8]=123;
 
+
+         cout<<"Enter The Plain Text: ";
+         cin.getline(PT,s);
 
 
 
@@ -469,7 +524,7 @@ int main()
   //  dispCC(KK,s);
 
     //const int L=strlen(K);
-            const int L=9;
+            const int L=c;
 
     int R=0;
 
@@ -532,6 +587,8 @@ while(R<=L/2)
     cout<<endl<<"Final Key After Transposition"<<endl;
         dispCC(fKeyT,L);
 
+        EK<<
+
 
 
 
@@ -564,17 +621,21 @@ while(R<=L/2)
 }
 
 
-ofstream FW;
-FW.open("OUT.txt");
+ofstream FW,EN;
+FW.open("OUT1.txt");
 for(i=0;i<9;++i)
 FW<<CTi[i]<<endl;
 FW.close();
 
 
+    EN.open("O.txt");
+    EN<<CT;
 
+    EN.close();
 
+    }
 
-    getch();
+   getch();
 
     return 0;
 
