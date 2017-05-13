@@ -4,6 +4,7 @@
 #include<string.h>
 #include "keyGen.cpp"
 #include "trans.cpp"
+#include "decrpyt.cpp"
 
 int L;
 
@@ -39,6 +40,9 @@ int findMod(char K[], int L)
    }
 dispII(S,9);
     M=sum%L;
+
+    ::sum=sum0;
+
     return M;
 }
 
@@ -60,49 +64,7 @@ int dChoose()
 }
 
 
-void decrypt(int L, int m)
-{
-    ifstream EF,DE;
-    EF.open("o.txt");
-    DE.open("k.txt");
-    static int len=L;
-    int i=0;
 
-    char ct[len];
-    char tk[len];
-    char PT[len];
-
-    if(m==1)
-    {
-       EF.getline(ct,L);
-       cout<<endl<<"Last Cipher Text"<<endl;
-       dispCC(ct,L);
-    }
-    else
-        cout<<"\t\t\t Enter The Text To Be Decrypted: ";
-        cin.getline(ct,L);
-
-    int R=::L/2;
-
-    while(R>0)
-    {
-        cout<<endl<<"Round "<<R-L<<endl;
-        DE.getline(tk,L);
-
-         for(i=0;i<L;++i)
-            {
-                PT[i]=exor(ct[i],tk[i]);
-                ct[i]=PT[i];
-            }
-
-        --R;
-    }
-
-
-dispCC(ct,L);
-
-
-}
 
 
 
@@ -116,9 +78,17 @@ int main()
 
    // const int s=c;
    ofstream EK;
-   EK.open("k.txt");
 
-   int c;
+   ofstream EKI;
+
+
+   ofstream T;
+
+
+
+
+
+   static int a,c;
 
    int e=choose();
    int d=0;
@@ -135,12 +105,18 @@ int main()
 
    if(e==1)
     {
+         EK.open("k.txt");
+        EKI.open("ki.txt");
+
    cout<<"\t\t\t Enter The Size Of The Key (Squares) (9-81): ";
    cin>>c;
         const int s=c;
+        T.open("KL.txt");
+        T<<s;
+        T.close();
 
-
-        char PT[s]="abcdefgh";
+        //char PT[s]="abcdefgh";
+        char PT[s];
 
          cout<<endl<<endl<<"\t\t\tEnter The Plain Text (Size "<<c<<"): ";
          cin.getline(PT,s);
@@ -178,7 +154,7 @@ int main()
 
     }
     cout<<endl<<"Plain Text"<<endl;
-    dispCC(PT,9);
+    dispCC(PT,s);
 
    // cout<<endl<<"Original Key "<<endl;
   //  dispCC(KK,s);
@@ -252,13 +228,16 @@ while(R<=L/2)
         for(i=0;i<L;++i)
         {
             EK<<fKeyT[i];
+            a=fKeyT[i];
+            EKI<<a<<" ";
         }
         EK<<"\n";
+        EKI<<endl;
 
 
 
         cout<<endl<<"Selected Key Copied"<<endl;
-    dispCC(key1,L);
+        dispCC(key1,L);
 
      cout<<endl<<"Plain Text"<<endl;
     dispCC(PT,L);
@@ -278,6 +257,8 @@ while(R<=L/2)
 
 
 
+
+
     cout<<endl<<"Cipher Text"<<endl;
     dispCC(CT,L);
 
@@ -286,6 +267,7 @@ while(R<=L/2)
 }
 
 EK.close();
+EKI.close();
 
 ofstream FW,EN;
 FW.open("OUT1.txt");
@@ -314,7 +296,7 @@ FW.close();
       d=dChoose();
     }
         if(d!=3)
-        decrypt(::L,d);
+        Dec(d);
 
         else
             exit(0);

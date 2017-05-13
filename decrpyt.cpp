@@ -12,7 +12,7 @@ void Dec (int m)
 {
     ifstream EF,DE;
     EF.open("OUT1.txt");
-    DE.open("k.txt");
+    DE.open("ki.txt");
     int i=0,a=0,R=0,c=0;;
 
     string ct;
@@ -44,7 +44,6 @@ void Dec (int m)
 
         const int size=i;
                int cti[size];
-                   R=size/2;
 
 
 
@@ -60,30 +59,60 @@ void Dec (int m)
         cin>>ct;
     }
 
-    cout<<endl<<"R "<<R<<endl;
+        int len;
+        ifstream T;
+        T.open("KL.txt");
+        T>>len;
+        T.close();
 
-    while(R>-1)
+    R=0;
+    cout<<endl<<"R "<<R<<endl<<"Length "<<len<<endl;;
+
+    while(R<=len/2)
     {
-        cout<<endl<<"Round "<<R-(ct.length())<<endl;
+        cout<<endl<<"Round "<<R<<endl;
 
         i=0;
-        while((DE>>c)!="\n")
+        for(i=0;i<len;++i)
+        {
+            cout<<"tk["<<i<<"] ";
+            DE>>c;
             tk[i]=c;
+            cout<<c<<"\t";
+        }
+        cout<<endl;
 
         cout<<endl<<"Key "<<tk<<endl;
+        for(i=0;i<len;++i)
+            cout<<tk[i]<<"\t";
+        cout<<endl;
 
-         for(i=0;i<ct.length();++i)
+         static int a,b,c;
+         for(i=0;i<len;++i)
             {
-                PT[i]=exor(ct[i],tk[i]);
+                a=ct[i];
+                b=tk[i];
+                c=exor(a,b);
+                PT[i]=c;
                 ct[i]=PT[i];
+                cout<<endl<<"A "<<a<<"\t B "<<b<<"\t C "<<c<<endl;
             }
+            cout<<endl<<"Ciphered Text After Round "<<R<<endl;
+            for(i=0;i<len;++i)
+                cout<<ct[i]<<"\t";
+            cout<<endl;
 
-        --R;
+
+
+        ++R;
     }
 
 
 
 cout<<endl<<"Deciphered Text"<<endl;
 cout<<PT;
+
+EF.close();
+DE.close();
 
 }
