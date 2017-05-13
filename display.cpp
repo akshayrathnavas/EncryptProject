@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void dispc(char a[3][3], int m)
+void dispc(char *a, int m)
 {
 
 
@@ -19,7 +19,7 @@ void dispc(char a[3][3], int m)
             for(j=0;j<m;++j)
             {
 
-                cout<<a[i][j]<<"\t";
+                cout<< *(a+ i*m + j)<<"\t";
 
             }
                 cout<<endl;
@@ -28,7 +28,7 @@ void dispc(char a[3][3], int m)
  cout<<endl;
 }
 
-void dispi(int a[3][3], int m)
+void dispi(int *a, int m)
 {
 
 
@@ -41,7 +41,7 @@ void dispi(int a[3][3], int m)
             for(j=0;j<m;++j)
             {
 
-                cout<<a[i][j]<<"\t";
+                cout<< *(a+ i*m + j)<<"\t";
 
             }
                 cout<<endl;
@@ -59,7 +59,7 @@ void dispCC(char a[], int m)
     for(i=0;i<m;++i)
     {
 
-        cout<<a[i];
+        cout<<a[i]<<"\t";
     }
     cout<<endl;
     cout<<endl;
@@ -75,10 +75,35 @@ void dispII(int a[], int m)
     for(i=0;i<m;++i)
     {
 
-        cout<<a[i];
+        cout<<a[i]<<"\t";
     }
     cout<<endl;
     cout<<endl;
 }
+
+/*
+
+int main(){
+    char a[5][5];
+    int b[5][5];
+    int p=0;
+    for(int i=0;i<5;++i){
+        for(int j=0;j<5;++j)
+        {
+
+
+            a[i][j]='a'+ p++;
+            b[i][j]=i*j;
+        }
+    }
+
+    dispc(a[0],5);
+    dispi(b[0],5);
+
+    getch();
+
+}
+
+*/
 
 

@@ -1,20 +1,20 @@
+#pragma once
 #include<fstream>
 #include <iostream>
 #include<cstdio>
 #include<cmath>
 #include<string.h>
 #include<conio.h>
-#include "keyGen.cpp"
 
-using namespace std;
 
-void conv(K,k2,L)
+char* kSel(char *a, char *b, int m)
 {
-    int KI,K2I;
-    for(i=0;i<L;i++)
+    int i=0, j=0;
+
+    for(i=0;i<m;++i)
     {
-        KI[i]=K[i];
-        K2I[i]=k2[i];
+
+
     }
 
 }

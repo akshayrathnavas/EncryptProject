@@ -26,7 +26,7 @@ char* Gen(int s)
    for(i=0;i<s;++i)
    {
         t=rand()%256;
-        while(!(t<256))
+        while(!((t<256)&&(t!=0)))
         {
             t=rand()%256;
         }
@@ -36,11 +36,13 @@ char* Gen(int s)
         t=rand()%256;
    }
 
-  //  dispCC(K,s);
-  //  dispII(Ki,s);
+cout<<endl<<"Original Key"<<endl;
+   dispCC(K,s);
+cout<<endl<<"Original Key Integer"<<endl;
+  dispII(Ki,s);
 
-
-    return K;
+    char* k_pointer=K;
+    return k_pointer;
 
 
 }
