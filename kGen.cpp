@@ -38,7 +38,7 @@ char* Gen(int s)
 /*
 cout<<endl<<"Original Key"<<endl;
    dispCC(K,s);
-cout<<endl<<"Original Key Integer"<<endl;
+cout<<endl<<"Original Key integer"<<endl;
   dispII(Ki,s);
   */
 
