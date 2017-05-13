@@ -24,6 +24,8 @@ void randKeyGen(char K[], int len)
 
      const int m=sqrt(L);
 
+     cout<<endl<<"L= "<<L<<" m= "<<m<<endl;
+
 
      char key1[m][m], r_Key1[m][m]; //String Matrix And Its Reverse
      int Ki[L], r_Keyi[L], key1i[m][m], r_Key1i[m][m]; //Integer Matrix And Its Reverse
@@ -31,19 +33,20 @@ void randKeyGen(char K[], int len)
      char key2[m][m], k2[L];
      int key2i[m][m];
 
-     strcpy(r_Key,K);
-      cout<<endl<<"Original Key"<<endl;
-     dispCC(r_Key,L);
+//strcpy(r_Key,K);
+    //  cout<<endl<<"Original Key Copied To Reverse"<<endl;
+    // dispCC(r_Key,L);
 
-        for(i = 1; K[i] != '\0'; i++);
+
+        j=L-1;
+        for(i = 0; i < L; ++i)
         {
-            k = i-1;
+            r_Key[i] = K[j];
+         //   cout<<endl<<K[j]<<"  "<<r_Key[i]<<endl;
+
+            --j;
         }
-        for(j = 0; j <= i-1; j++)
-        {
-            r_Key[j] = K[k];
-            --k;
-        }
+
 
 
         for(i=0;i<L;++i)
@@ -133,7 +136,7 @@ dispc(key2[0],m);
 
 dispCC(k2,L);
 
-char* selKey=dispi(K[0],key2[0], m);
+//char* selKey=dispi(K[0],key2[0], m);
 
 
 
@@ -165,8 +168,8 @@ int main()
 
     }
 
-    cout<<endl<<"Original Key "<<endl;
-    dispCC(KK,s);
+   // cout<<endl<<"Original Key "<<endl;
+  //  dispCC(KK,s);
 
     int L=strlen(K);
 
