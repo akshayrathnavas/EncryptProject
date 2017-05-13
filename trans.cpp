@@ -42,7 +42,7 @@ char* trans(char K[], int L, int sum)
         ++i;
         --L;
     }
-    dispCC(K,9);
+    return K;
 }
 /*
 

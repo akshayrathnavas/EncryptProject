@@ -17,9 +17,9 @@ using namespace std;
 //void dispi(int a[m][m], int m); // Display Integer Array/Matrix
 //unsigned int ConvertToBinary(int n);
 
-char* randKeyGen(char K[], int len)
+char* randKeyGen(char K[], int len, int sum)
  {
-     static int i, j, k, p, q, a[100],sum, M, n;
+     static int i, j, k, p, q, a[100], M, n;
      const int L=len;
      char r_Key[L];
 
@@ -112,6 +112,7 @@ dispi(r_Key1i[0],m);
 
 dispi(key1i[0],m);
 
+n=0;
 for(i=0;i<m;++i)
 {
 

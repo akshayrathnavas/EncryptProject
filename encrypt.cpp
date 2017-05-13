@@ -45,18 +45,20 @@ private:
 
 int sum=0;
 
-int findMod(char K[], int n)
+int findMod(char K[], int L)
 {
+    sum=0;
     int i=0;
-    const int L=n;
     int a[L];
+    int M;
 
      for(i=0;i<L;++i)
      {
         a[i]=K[i];
         sum+=a[i]*(i+1);
      }
-
+    M=sum%L;
+    return M;
 }
 
 
@@ -85,7 +87,7 @@ int main()
    // cout<<endl<<"Original Key "<<endl;
   //  dispCC(KK,s);
 
-    int L=strlen(K);
+    const int L=strlen(K);
 
     int R=0;
 
@@ -101,19 +103,21 @@ while(R<=L/2)
          cout<<endl<<"=======================================================Round "<<R;
          cout<<"============================================================="<<endl;
 
-    k2=randKeyGen(key1,s);
+    M=findMod(key1,s);
+
+    k2=randKeyGen(key1,s, sum);
     p=0;
 
-     for(i=0;i<c;++i)
+     for(i=0;i<L;++i)
     {
         key2[i]= k2[p++];
 
     }
 
-    findMod(key1,s);
 
 
     fP=kSel(key1, key2, L, M);
+
 
     p=0;
 
@@ -122,6 +126,8 @@ while(R<=L/2)
         fKey[i]= fP[p++];
 
     }
+        dispCC(fKey,L);
+
 
     fPT=trans(fKey,L,sum);
 
@@ -132,15 +138,27 @@ while(R<=L/2)
 
     }
 
-    dispCC(fKeyT,L);
-
     ++R;
+
+
+        for(i=0;i<L;++i)
+        {
+            key1[i]=fKeyT[i];
+
+        }
+
+    cout<<endl<<"Final Key After Transposition"<<endl;
+        dispCC(fKeyT,L);
+
+
+        cout<<endl<<"Copied Key After Transposition"<<endl;
+    dispCC(key1,L);
 
 
 
 }
 
-    dispCC(fKeyT,L);
+
 
 
     getch();
