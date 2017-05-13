@@ -8,6 +8,7 @@
 #include "display.cpp"
 #include "xor.cpp"
 #include "kGen.cpp"
+#include "keySel.cpp"
 
 using namespace std;
 
@@ -136,7 +137,32 @@ dispc(key2[0],m);
 
 dispCC(k2,L);
 
-//char* selKey=dispi(K[0],key2[0], m);
+char* fP=kSel(K, k2, L, M);
+char fKey[L];
+
+ p=0;
+
+    for(i=0;i<L;++i)
+    {
+        fKey[i]= fP[p++];
+
+    }
+
+
+/*
+
+for(i=0;i<L;++i)
+    =*(fP+i);
+
+*/
+
+
+
+
+dispCC(fKey,L);
+
+
+
 
 
 
