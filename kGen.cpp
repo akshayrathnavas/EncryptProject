@@ -35,11 +35,12 @@ char* Gen(int s)
 
         t=rand()%256;
    }
-
+/*
 cout<<endl<<"Original Key"<<endl;
    dispCC(K,s);
 cout<<endl<<"Original Key Integer"<<endl;
   dispII(Ki,s);
+  */
 
     char* k_pointer=K;
     return k_pointer;

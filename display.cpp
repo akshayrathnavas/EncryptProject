@@ -54,7 +54,6 @@ void dispi(int *a, int m)
 void dispCC(char a[], int m)
 {
     int i=0;
-  //  int l=strlen(a);
 
     for(i=0;i<m;++i)
     {
@@ -70,7 +69,6 @@ void dispCC(char a[], int m)
 void dispII(int a[], int m)
 {
     int i=0;
-  //  int l=(sizeof(a)/sizeof(a[0]));
 
     for(i=0;i<m;++i)
     {
