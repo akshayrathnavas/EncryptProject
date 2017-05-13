@@ -120,12 +120,16 @@ int main()
         char PT[s];
 
          cout<<endl<<endl<<"\t\t\tEnter The Plain Text (Size "<<c<<"): ";
-         cin.getline(PT,s);
-
+         while(i<s-1)
+         {
+            PT[i]=getch();
+            cout<<PT[i];
+            ++i;
+         }
         char CT[s];
         int PTi[s];
         int CTi[s];
-
+/*
         PT[0]=-24;
         PT[1]=70;
         PT[2]=-120;
@@ -139,7 +143,7 @@ int main()
 
          cout<<"Enter The Plain Text: ";
          cin.getline(PT,s);
-
+*/
 
 
 
@@ -149,7 +153,7 @@ int main()
     int p=0;
     int M;
 
-    for(i=0;i<c;++i)
+    for(i=0;i<s;++i)
     {
         key1[i]= K[p++];
 
