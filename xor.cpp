@@ -14,7 +14,7 @@ int exor(int x, int y)
 {
     int res = 0; // Initialize Result
 
-    // Assuming 8-bit integer
+    // Assuming 8-bit Integer
     for (int i = 8; i >= 0; --i)
     {
        // Find current bits in x and y

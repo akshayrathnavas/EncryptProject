@@ -12,6 +12,7 @@ void clrscr()
 {
     system("cls");
 }
+
 int sum=0;
 int findMod(char K[], int L)
 {
@@ -271,7 +272,7 @@ EKI.close();
 
 ofstream FW,EN;
 FW.open("OUT1.txt");
-for(i=0;i<9;++i)
+for(i=0;i<L;++i)
 FW<<CTi[i]<<endl;
 FW.close();
 
@@ -287,7 +288,7 @@ FW.close();
     {
         clrscr();
 
-        d=dChoose();
+       /* d=dChoose();
 
     while((e<1)||(e>3))
     {
@@ -296,10 +297,9 @@ FW.close();
       d=dChoose();
     }
         if(d!=3)
-        Dec(d);
+        */
 
-        else
-            exit(0);
+        Dec();
 
 
     }

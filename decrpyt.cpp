@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void Dec (int m)
+void Dec ()
 {
     ifstream EF,DE;
     EF.open("OUT1.txt");
@@ -19,8 +19,7 @@ void Dec (int m)
     string tk;
     string PT;
 
-    if(m==1)
-    {
+
        cout<<endl<<"Last Cipher Text"<<endl;
 
 
@@ -52,12 +51,7 @@ void Dec (int m)
         for(i=0;i<size;++i)
             cti[i]=ct[i];
         dispII(cti,size);
-    }
-    else
-    {
-        cout<<"\t\t\t Enter The Text To Be Decrypted: ";
-        cin>>ct;
-    }
+
 
         int len;
         ifstream T;
@@ -67,6 +61,8 @@ void Dec (int m)
 
     R=0;
     cout<<endl<<"R "<<R<<endl<<"Length "<<len<<endl;;
+
+             static int aa,bb,cc;
 
     while(R<=len/2)
     {
@@ -87,15 +83,14 @@ void Dec (int m)
             cout<<tk[i]<<"\t";
         cout<<endl;
 
-         static int a,b,c;
          for(i=0;i<len;++i)
             {
-                a=ct[i];
-                b=tk[i];
-                c=exor(a,b);
-                PT[i]=c;
+                aa=ct[i];
+                bb=tk[i];
+                cc=exor(aa,bb);
+                PT[i]=cc;
                 ct[i]=PT[i];
-                cout<<endl<<"A "<<a<<"\t B "<<b<<"\t C "<<c<<endl;
+                cout<<endl<<"A "<<aa<<"\t B "<<bb<<"\t C "<<cc<<endl;
             }
             cout<<endl<<"Ciphered Text After Round "<<R<<endl;
             for(i=0;i<len;++i)

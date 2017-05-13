@@ -8,7 +8,7 @@
 using namespace std;
 
 
-int bin;
+unsigned int bin;
 
 
 void decToBin(int n)
@@ -20,7 +20,7 @@ void decToBin(int n)
     bin=(bin*10)+(n%2);
 }
 
-int ConvertToBinary(int n)
+unsigned int ConvertToBinary(int n)
 {
     decToBin(n);
     return bin;
